@@ -21,6 +21,9 @@ namespace Bank
         private double balance;
         private bool frozen = false;
 
+        public const string DebitAmountExceedsBalanceMessage = "Debit amount exceeds Balance";
+        public const string DebitAmountLessThanZeroMessage = "Debit amount less than zero";
+
         private BankAccount()
         {
 
@@ -51,15 +54,15 @@ namespace Bank
 
             if(amount > balance)
             {
-                throw new ArgumentOutOfRangeException("amount");
+                throw new ArgumentOutOfRangeException("amount", amount, DebitAmountExceedsBalanceMessage);
             }
 
             if(amount < 0)
             {
-                throw new ArgumentOutOfRangeException("amount");
+                throw new ArgumentOutOfRangeException("amount", amount, DebitAmountLessThanZeroMessage);
             }
 
-            balance += amount; //intentionally incorrect code
+            balance -= amount; //intentionally incorrect code
         }
 
         public void credit(double amount)
